@@ -8,15 +8,18 @@ from queue import Queue
 import threading
 import random
 import time
+from radio_reader import RadioReader
 
 q = Queue()
 
 
 def radio_reader():
-    while True:
-        rand = round(random.random() * 100)
-        print("sample: ", rand)
-        q.put(rand)
+    reader = RadioReader(q)
+    reader.start()
+    # while True:
+    #     rand = round(random.random() * 100)
+    #     print("sample: ", rand)
+    #     q.put(rand)
 
 
 def feedbacker():
@@ -45,4 +48,3 @@ feedbacker_thread.start()
 * https://www.troyfawkes.com/learn-python-multithreading-queues-basics/
 * https://chat.openai.com/
 """
-
