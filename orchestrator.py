@@ -9,25 +9,22 @@ import threading
 import random
 import time
 from radio_reader import RadioReader
+from feedbacker import Feedbacker
 
 q = Queue()
+reader = RadioReader(q)
+f = Feedbacker()
 
 
 def radio_reader():
-    reader = RadioReader(q)
     reader.start()
-    # while True:
-    #     rand = round(random.random() * 100)
-    #     print("sample: ", rand)
-    #     q.put(rand)
 
 
 def feedbacker():
     while True:
         item = q.get()
-        print("feedback", item)
-        q.task_done()
-        time.sleep(0.1)
+        f.change(item)
+        time.sleep(2)
 
 
 radio_reader_thread = threading.Thread(target=radio_reader)
@@ -35,6 +32,8 @@ radio_reader_thread.start()
 
 feedbacker_thread = threading.Thread(target=feedbacker)
 feedbacker_thread.start()
+
+# TODO: graceful exit & cleanup
 
 """
 * i had been blocking on the feedbacker_thread, but then when i removed that, it didn't seem to change the outcome that much
