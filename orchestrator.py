@@ -6,7 +6,6 @@ To start it will be responsible for starting the radio-reader and the feedbacker
 
 from queue import Queue
 import threading
-import random
 import time
 from radio_reader import RadioReader
 from feedbacker import Feedbacker
