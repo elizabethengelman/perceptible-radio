@@ -18,13 +18,8 @@ class RadioReader:
         sdr.read_samples_async(self.callback, num_samples=512)
 
     def callback(self, samples, context):
-        # convertedSamples = []
         for sample in samples:
             self.shared_queue.put([sample.real, sample.imag])
-            # convertedSamples.append([sample.real, sample.imag])
-
-        # print("samples: ", convertedSamples)  # put these on the queue instead
-
 
 """
 Notes/thoughts/questions:
