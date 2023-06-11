@@ -12,7 +12,7 @@ class Feedbacker:
     self.bValue = 0
 
   def change(self, raw_data):
-    self.pixels.fill(self.rValue, self.gValue, self.bValue)
+    self.pixels.fill((self.rValue, self.gValue, self.bValue))
     self.incrementTheRGBValue
 
   def incrementTheRGBValue(self):
