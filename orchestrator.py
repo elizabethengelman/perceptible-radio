@@ -9,27 +9,41 @@ import threading
 import time
 from radio_reader import RadioReader
 from feedbacker import Feedbacker
+import numpy
 
 q = Queue()
 reader = RadioReader(q)
 f = Feedbacker()
 
 
-def radio_reader():
+def start_radio_reader():
     reader.start()
 
+# def stop_radio_reader():
+  #can i do this by having the sdr instace be on the radioreader class, and then call cancel_ascyn whatever method 
 
-def feedbacker():
+
+def start_realtime_feedbacker():
     while True:
         item = q.get()
         f.change(item)
         time.sleep(2)
 
 
-radio_reader_thread = threading.Thread(target=radio_reader)
+def start_greenbank_feedbacker():
+    greenbank_data = [(0.26274509803921564+0.28627450980392166j), (-0.2313725490196078-0.16078431372549018j),
+                      (-0.0117647058823529+0.10588235294117654j), (-0.14509803921568631-0.19999999999999996j)]
+    for data_string in greenbank_data:
+        complex_value = numpy.complex128(data_string)
+        sample = [complex_value.real, complex_value.imag]
+        f.change(sample)
+        time.sleep(2)
+
+
+radio_reader_thread = threading.Thread(target=start_radio_reader)
 radio_reader_thread.start()
 
-feedbacker_thread = threading.Thread(target=feedbacker)
+feedbacker_thread = threading.Thread(target=start_realtime_feedbacker)
 feedbacker_thread.start()
 
 # TODO: graceful exit & cleanup

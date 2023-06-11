@@ -30,8 +30,3 @@ class Feedbacker:
       self.bValue = 0
     else:
       self.bValue = self.bValue + 1
-
-    
-
-# >>> pixels = neopixel.NeoPixel(board.D21, 60)
-# >>> pixels[0] = (255, 0, 0)
