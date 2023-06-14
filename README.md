@@ -1,4 +1,4 @@
-# perceivable-radio
+# perceptible-radio
 
 ## components
 * orchestrator
