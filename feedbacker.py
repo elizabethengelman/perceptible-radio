@@ -12,8 +12,15 @@ class Feedbacker:
     self.bValue = 0
 
   def change(self, raw_data):
-    self.pixels.fill((self.rValue, self.gValue, self.bValue))
-    self.incrementTheRGBValue()
+    real_r_g_b_tuple = map_raw_data_to_r_g_b(raw_data.real)
+    imag_r_g_b_tuple = map_raw_data_to_r_g_b(raw_data.imag)
+
+    for index, value in enumerate(self.pixels):
+      if index % 2 != 0:
+        self.pixels[index] = real_r_g_b_tuple
+      else:
+        self.pixels[index] = imag_r_g_b_tuple
+
 
   def incrementTheRGBValue(self):
     if self.rValue == 255:
