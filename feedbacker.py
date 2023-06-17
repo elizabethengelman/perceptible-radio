@@ -35,10 +35,9 @@ def map_num_to_range(num, inMin, inMax, outMin, outMax):
 
 
 def map_power_value_to_hex(power_value):
-    # it is possible for these raw values to be negative, so the range is -1 to 1
-    # mapping the raw data to a range that fits in the hex color range
+    #now that we're using power, i dont think that'll ever be less than zero
     print("power: ", power_value)
-    mapped_num = map_num_to_range(power_value, -1, 1, 1000000, 16777215)
+    mapped_num = map_num_to_range(power_value, 0, 1, 1000000, 16777215)
     rounded_mapped_number = round(mapped_num)
     # convert the mapped num decimal to a hex string, and then cut the x off the front
     return hex(rounded_mapped_number).split('x')[-1]
