@@ -31,7 +31,7 @@ def map_num_to_range(num, inMin, inMax, outMin, outMax):
 def map_raw_data_to_hex(raw_data_value):
     # it is possible for these raw values to be negative, so the range is -1 to 1
     # mapping the raw data to a range that fits in the hex color range
-    mapped_num = map_num_to_range(raw_data_value, -1, 1, 0, 16777215)
+    mapped_num = map_num_to_range(raw_data_value, -1, 1, 1000000, 16777215)
     rounded_mapped_number = round(mapped_num)
     # convert the mapped num decimal to a hex string, and then cut the x off the front
     return hex(rounded_mapped_number).split('x')[-1]
