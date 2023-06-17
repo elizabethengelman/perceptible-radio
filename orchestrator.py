@@ -57,8 +57,8 @@ def start_greenbank_feedbacker():
     for sample in greenbank_data:
         for individual_reading in sample:
             complex_value = numpy.complex128(individual_reading)
-            sample = [complex_value.real, complex_value.imag]
-            f.change(sample)
+            # sample = [complex_value.real, complex_value.imag]
+            f.change(complex_value)
             time.sleep(2)
 
 

@@ -19,7 +19,7 @@ class RadioReader:
 
     def callback(self, samples, context):
         for sample in samples:
-            self.shared_queue.put([sample.real, sample.imag])
+            self.shared_queue.put(sample)
 
 """
 Notes/thoughts/questions:
