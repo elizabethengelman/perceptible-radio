@@ -35,7 +35,7 @@ def map_num_to_range(num, inMin, inMax, outMin, outMax):
 
 
 def map_power_value_to_hex(power_value):
-    #now that we're using power, i dont think that'll ever be less than zero
+    # now that we're using power, i dont think that'll ever be less than zero
     print("power: ", power_value)
     mapped_num = map_num_to_range(power_value, 0, 1, 1000000, 16777215)
     rounded_mapped_number = round(mapped_num)
@@ -43,9 +43,13 @@ def map_power_value_to_hex(power_value):
     return hex(rounded_mapped_number).split('x')[-1]
 
 
-def hex_to_rgb(value):
-    lv = len(value)
-    return tuple(int(value[i:i+lv//3], 16) for i in range(0, lv, lv//3))
+def hex_to_rgb(hex):
+    rgb = []
+    for i in (0, 2, 4):
+        decimal = int(hex[i:i+2], 16)
+        rgb.append(decimal)
+
+    return tuple(rgb)
 
 
 def get_inverse_color(rgb_value):
