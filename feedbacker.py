@@ -15,6 +15,8 @@ class Feedbacker:
 
         rgb_tuple = hex_to_rgb(mapped_to_color_range)
         inverse_rgb_tuple = get_inverse_color(rgb_tuple)
+        print("rgb: ", rgb_tuple)
+        print("inverse rgb: ", inverse_rgb_tuple)
 
         for index, value in enumerate(self.pixels):
             if index % 2 != 0:
