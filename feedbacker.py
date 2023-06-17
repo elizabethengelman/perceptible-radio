@@ -8,35 +8,15 @@ NUM_PIXELS = 60
 class Feedbacker:
     def __init__(self):
         self.pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS)
-        self.rValue = 255
-        self.gValue = 0
-        self.bValue = 0
 
     def change(self, raw_data):
         real_r_g_b_tuple = map_raw_data_to_r_g_b(raw_data.real)
         imag_r_g_b_tuple = map_raw_data_to_r_g_b(raw_data.imag)
-
         for index, value in enumerate(self.pixels):
             if index % 2 != 0:
                 self.pixels[index] = real_r_g_b_tuple
             else:
                 self.pixels[index] = imag_r_g_b_tuple
-
-    def incrementTheRGBValue(self):
-        if self.rValue == 255:
-            self.rValue = 0
-        else:
-            self.rValue = self.rValue + 1
-
-        if self.gValue == 255:
-            self.gValue = 0
-        else:
-            self.gValue = self.gValue + 1
-
-        if self.bValue == 255:
-            self.bValue = 0
-        else:
-            self.bValue = self.bValue + 1
 
 
 def map_raw_data_to_r_g_b(raw_data_value):
