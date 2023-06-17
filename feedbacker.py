@@ -30,3 +30,12 @@ class Feedbacker:
       self.bValue = 0
     else:
       self.bValue = self.bValue + 1
+
+def map_raw_data_to_hex(raw_data_value):
+  # it is possible for these raw values to be negative, so the range is -1 to 1
+  mapped_num = map_num_to_range(raw_data_value, -1, 1, 0, 16777215) # mapping the raw data to a range that fits in the hex color range
+  return round(mapped_num)
+
+
+def map_num_to_range(num, inMin, inMax, outMin, outMax):
+  return outMin + (float(num - inMin) / float(inMax - inMin) * (outMax - outMin))
