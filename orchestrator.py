@@ -27,7 +27,7 @@ def start_realtime_feedbacker():
     while True:
         item = q.get()
         f.change(item)
-        time.sleep(2)
+        time.sleep(1)
 
 
 def get_greenbank_data():
