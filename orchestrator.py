@@ -9,11 +9,13 @@ import threading
 import time
 from radio_reader import RadioReader
 from feedbacker import Feedbacker
+from audio_guider import AudioGuider
 import numpy
 
 q = Queue()
 reader = RadioReader(q)
 f = Feedbacker()
+audio = AudioGuider()
 
 
 def start_radio_reader():
@@ -62,11 +64,23 @@ def start_greenbank_feedbacker():
             time.sleep(2)
 
 
-radio_reader_thread = threading.Thread(target=start_radio_reader)
-radio_reader_thread.start()
+play_audio_1_thread = threading.Thread(target=audio.play_audio_1)
+play_audio_1_thread.start()
 
-feedbacker_thread = threading.Thread(target=start_realtime_feedbacker)
-feedbacker_thread.start()
+# radio_reader_thread = threading.Thread(target=start_radio_reader)
+# radio_reader_thread.start()
+
+# feedbacker_thread = threading.Thread(target=start_realtime_feedbacker)
+# feedbacker_thread.start()
+
+
+
+"""
+Brainstorming:
+- it would be cool if there was a subtle fade in and out at the beginning
+- also, it may be too much but wouldn't it be cool if i could also play real live radio
+"""
+
 
 # TODO: graceful exit & cleanup
 
