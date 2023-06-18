@@ -2,6 +2,9 @@ from playsound import playsound
 
 
 class AudioGuider:
+    def play_background_music(self):
+        playsound("./audio/background.mp3")
+
     def play_audio_1(self):
         playsound("./audio/1-intro.m4a")
 
