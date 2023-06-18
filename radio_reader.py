@@ -11,7 +11,7 @@ class RadioReader:
         sdr = RtlSdr()
         # configure device
         sdr.sample_rate = 2.048e6  # 2048000 Hz
-        sdr.center_freq = 8.91e7  # 89100000 Hz
+        sdr.center_freq = 8.95e7  # 89100000 Hz
         sdr.freq_correction = 60   # PPM
         sdr.gain = 'auto'
         # this defaults to reading 1024 samples
