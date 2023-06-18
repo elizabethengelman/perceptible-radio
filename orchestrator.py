@@ -99,7 +99,6 @@ def start_outro_feedback():
 # Background music
 play_background_music_thread = threading.Thread(target=audio.play_background_music)
 play_background_music_thread.start()
-play_background_music_thread.join()
 
 # Discrete sections
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SECTION 1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
