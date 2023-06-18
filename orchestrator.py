@@ -88,8 +88,6 @@ def start_greenbank_feedbacker():
                 break
 
 # STEP 4
-
-
 def start_outro_feedback():
     while True:
         print("pulse")
@@ -110,7 +108,7 @@ intro_feedback.start()
 play_audio_1_thread.join()
 stop_step_1 = True
 # woah this fucking worked! i feel like if i just have a background audio that is on it's own thread group and never stops, maybe that'll work to make it not seem so disjointed?
-print("everything is stopped")
+print("phase 1 stopped")
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SECTION 2~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # when that is finished, kick of step 2 (how do I do this piece?)
@@ -118,18 +116,15 @@ print("everything is stopped")
 play_audio_2_thread = threading.Thread(target=audio.play_audio_2)
 play_audio_2_thread.start()
 
-fake_real_time_feedbacker_thread = threading.Thread(
-    target=start_realtime_feedbacker)
-fake_real_time_feedbacker_thread.start()
+radio_reader_thread = threading.Thread(target=start_radio_reader)
+radio_reader_thread.start()
+
+real_time_feedbacker_thread = threading.Thread(target=start_realtime_feedbacker)
+real_time_feedbacker_thread.start()
 
 play_audio_2_thread.join()
 stop_step_2 = True
 
-# radio_reader_thread = threading.Thread(target=start_radio_reader)
-# radio_reader_thread.start()
-
-# feedbacker_thread = threading.Thread(target=start_realtime_feedbacker)
-# feedbacker_thread.start()
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SECTION 3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 3:
