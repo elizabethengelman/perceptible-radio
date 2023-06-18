@@ -8,14 +8,19 @@ from queue import Queue
 import threading
 import time
 from radio_reader import RadioReader
-from feedbacker import Feedbacker
+# from feedbacker import Feedbacker
 from audio_guider import AudioGuider
 import numpy
 
 q = Queue()
 reader = RadioReader(q)
-f = Feedbacker()
+# f = Feedbacker()
 audio = AudioGuider()
+
+stop_step_1 = False
+stop_step_2 = False
+stop_step_3 = False
+stop_step_4 = False
 
 
 def start_radio_reader():
@@ -27,9 +32,12 @@ def start_radio_reader():
 
 def start_realtime_feedbacker():
     while True:
-        item = q.get()
-        f.change(item)
-        time.sleep(1)
+        print("lights!")
+        if stop_step_2:
+            break
+          # item = q.get()
+          # f.change(item)
+          # time.sleep(1)
 
 
 def get_greenbank_data():
@@ -55,17 +63,60 @@ def get_greenbank_data():
 
 
 def start_greenbank_feedbacker():
-    greenbank_data = get_greenbank_data()
-    for sample in greenbank_data:
-        for individual_reading in sample:
-            complex_value = numpy.complex128(individual_reading)
-            # sample = [complex_value.real, complex_value.imag]
-            f.change(complex_value)
-            time.sleep(2)
+    while True:
+        print("greenbank lights")
+        if stop_step_3:
+            break
+    # greenbank_data = get_greenbank_data()
+    # for sample in greenbank_data:
+    #     for individual_reading in sample:
+    #         complex_value = numpy.complex128(individual_reading)
+    #         # sample = [complex_value.real, complex_value.imag]
+    #         f.change(complex_value)
+    #         time.sleep(2)
 
 
+def start_intro_feedback():
+    while True:
+        print("pulse")
+        time.sleep(1)
+        if stop_step_1:
+            break
+
+def start_outro_feedback():
+    while True:
+        print("pulse")
+        time.sleep(1)
+        if stop_step_4:
+            break
+
+
+# Discrete sections
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SECTION 1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 1: play the audio and have the feedbacker do real subtle pulsing
 play_audio_1_thread = threading.Thread(target=audio.play_audio_1)
 play_audio_1_thread.start()
+
+intro_feedback = threading.Thread(target=start_intro_feedback)
+intro_feedback.start()
+
+play_audio_1_thread.join()
+stop_step_1 = True
+# woah this fucking worked! i feel like if i just have a background audio that is on it's own thread group and never stops, maybe that'll work to make it not seem so disjointed?
+print("everything is stopped")
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SECTION 2~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# when that is finished, kick of step 2 (how do I do this piece?)
+# 2: play audio 2, start the radio_reader and start_realtime_feedbacker
+play_audio_2_thread = threading.Thread(target=audio.play_audio_2)
+play_audio_2_thread.start()
+
+fake_real_time_feedbacker_thread = threading.Thread(
+    target=start_realtime_feedbacker)
+fake_real_time_feedbacker_thread.start()
+
+play_audio_2_thread.join()
+stop_step_2 = True
 
 # radio_reader_thread = threading.Thread(target=start_radio_reader)
 # radio_reader_thread.start()
@@ -73,6 +124,31 @@ play_audio_1_thread.start()
 # feedbacker_thread = threading.Thread(target=start_realtime_feedbacker)
 # feedbacker_thread.start()
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SECTION 3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 3:
+play_audio_3_thread = threading.Thread(target=audio.play_audio_3)
+play_audio_3_thread.start()
+
+# this one will need to be handled differently depending on if im going to use real greenbank data, or fake it/cheat
+# or maybe not, i probably have way more greenbank data than i need, so ill still probably want to stop it before i reach the end of the data
+fake_greenbank_feedbacker_thread = threading.Thread(
+    target=start_greenbank_feedbacker)
+fake_greenbank_feedbacker_thread.start()
+
+play_audio_3_thread.join()
+stop_step_3 = True
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SECTION 4~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 4: Outro
+play_audio_4_thread = threading.Thread(target=audio.play_audio_4)
+play_audio_4_thread.start()
+
+outro_feedback = threading.Thread(target=start_outro_feedback)
+outro_feedback.start()
+
+play_audio_4_thread.join()
+stop_step_4 = True
+print("goodbye!")
 
 
 """
