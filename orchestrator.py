@@ -32,9 +32,8 @@ def start_intro_feedback():
             break
 
 # STEP 2
-
-
 def start_radio_reader():
+    print("starting radio reader")
     reader.start()
 
 # def stop_radio_reader():
@@ -87,6 +86,7 @@ def start_greenbank_feedbacker():
                 break
 
 # STEP 4
+
 
 def start_outro_feedback():
     while True:

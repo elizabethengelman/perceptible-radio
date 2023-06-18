@@ -19,6 +19,7 @@ class RadioReader:
 
     def callback(self, samples, context):
         for sample in samples:
+            print("sending a sample to the shared queue")
             self.shared_queue.put(sample)
 
 
