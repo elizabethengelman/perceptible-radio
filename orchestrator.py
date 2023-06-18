@@ -32,13 +32,11 @@ def start_intro_feedback():
             break
 
 # STEP 2
+
+
 def start_radio_reader():
     print("starting radio reader")
     reader.start()
-
-
-def stop_radio_reader():
-    reader.cancel_read_async()
 
 
 def start_realtime_feedbacker():
@@ -48,7 +46,7 @@ def start_realtime_feedbacker():
         f.change(item)
         time.sleep(1)
         if stop_step_2:
-            stop_radio_reader()
+            reader.stop()
             break
 
 
@@ -88,6 +86,8 @@ def start_greenbank_feedbacker():
                 break
 
 # STEP 4
+
+
 def start_outro_feedback():
     while True:
         print("pulse")
@@ -119,12 +119,13 @@ play_audio_2_thread.start()
 radio_reader_thread = threading.Thread(target=start_radio_reader)
 radio_reader_thread.start()
 
-real_time_feedbacker_thread = threading.Thread(target=start_realtime_feedbacker)
+real_time_feedbacker_thread = threading.Thread(
+    target=start_realtime_feedbacker)
 real_time_feedbacker_thread.start()
 
 play_audio_2_thread.join()
 stop_step_2 = True
-
+print("phase 2 stopped")
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SECTION 3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 3:
@@ -139,6 +140,7 @@ fake_greenbank_feedbacker_thread.start()
 
 play_audio_3_thread.join()
 stop_step_3 = True
+print("phase 3 stopped")
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SECTION 4~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 4: Outro
