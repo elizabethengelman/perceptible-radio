@@ -8,19 +8,30 @@ from queue import Queue
 import threading
 import time
 from radio_reader import RadioReader
-# from feedbacker import Feedbacker
+from feedbacker import Feedbacker
 from audio_guider import AudioGuider
 import numpy
 
 q = Queue()
 reader = RadioReader(q)
-# f = Feedbacker()
+f = Feedbacker()
 audio = AudioGuider()
 
 stop_step_1 = False
 stop_step_2 = False
 stop_step_3 = False
 stop_step_4 = False
+
+
+# STEP 1
+def start_intro_feedback():
+    while True:
+        print("pulse")
+        time.sleep(1)
+        if stop_step_1:
+            break
+
+# STEP 2
 
 
 def start_radio_reader():
@@ -32,14 +43,14 @@ def start_radio_reader():
 
 def start_realtime_feedbacker():
     while True:
-        print("lights!")
+        item = q.get()
+        f.change(item)
+        time.sleep(1)
         if stop_step_2:
             break
-          # item = q.get()
-          # f.change(item)
-          # time.sleep(1)
 
 
+# STEP 3
 def get_greenbank_data():
     april_23_file = open("./2023-04-23", "r")
     april_23_data = april_23_file.read()
@@ -63,25 +74,17 @@ def get_greenbank_data():
 
 
 def start_greenbank_feedbacker():
-    while True:
-        print("greenbank lights")
-        if stop_step_3:
-            break
-    # greenbank_data = get_greenbank_data()
-    # for sample in greenbank_data:
-    #     for individual_reading in sample:
-    #         complex_value = numpy.complex128(individual_reading)
-    #         # sample = [complex_value.real, complex_value.imag]
-    #         f.change(complex_value)
-    #         time.sleep(2)
+    greenbank_data = get_greenbank_data()
+    for sample in greenbank_data:
+        for individual_reading in sample:
+            complex_value = numpy.complex128(individual_reading)
+            # sample = [complex_value.real, complex_value.imag]
+            f.change(complex_value)
+            time.sleep(2)
+            if stop_step_3:
+                break
 
-
-def start_intro_feedback():
-    while True:
-        print("pulse")
-        time.sleep(1)
-        if stop_step_1:
-            break
+# STEP 4
 
 def start_outro_feedback():
     while True:
