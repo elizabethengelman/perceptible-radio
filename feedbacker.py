@@ -8,9 +8,15 @@ NUM_PIXELS = 60
 class Feedbacker:
     def __init__(self):
         self.pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS)
+        self.power_readings = []
 
     def change(self, raw_data):
         signal_power = get_signal_power(raw_data)
+        self.power_readings.append(signal_power)
+
+        avg = sum(self.power_readings) / len(self.power_readings)
+        print("AVERAGE POWER READING: ", avg)
+
         mapped_to_color_range = map_power_value_to_hex(signal_power)
 
         rgb_tuple = hex_to_rgb(mapped_to_color_range)
