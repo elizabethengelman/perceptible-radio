@@ -44,7 +44,7 @@ def start_radio_reader():
 def start_realtime_feedbacker():
     while True:
         item = q.get()
-        print("sending a new value to the feedbacker")
+        print("sending a new realtime value to the feedbacker")
         f.change(item)
         time.sleep(1)
         if stop_step_2:
@@ -80,7 +80,7 @@ def start_greenbank_feedbacker():
         for individual_reading in sample:
             complex_value = numpy.complex128(individual_reading)
             # sample = [complex_value.real, complex_value.imag]
-            print("sending a new value to the feedbacker")
+            print("sending a new greenbank value to the feedbacker")
             f.change(complex_value)
             time.sleep(1)
             if stop_step_3:
