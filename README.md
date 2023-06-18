@@ -7,6 +7,5 @@
 * feedbacker
 
 ## dependencies
-* install pipreqs: https://github.com/bndr/pipreqs
-* run pipreqs to create a requirements.txt file
-* run  pip install -r requirements.txt to install from that file
+sudo pip install playsound
+sudo apt install python3-gst-1.0
