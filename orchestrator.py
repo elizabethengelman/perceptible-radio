@@ -36,8 +36,9 @@ def start_radio_reader():
     print("starting radio reader")
     reader.start()
 
-# def stop_radio_reader():
-  # can i do this by having the sdr instace be on the radioreader class, and then call cancel_async whatever method
+
+def stop_radio_reader():
+    reader.cancel_read_async()
 
 
 def start_realtime_feedbacker():
@@ -47,6 +48,7 @@ def start_realtime_feedbacker():
         f.change(item)
         time.sleep(1)
         if stop_step_2:
+            stop_radio_reader()
             break
 
 
