@@ -14,6 +14,7 @@ pixels = neopixel.NeoPixel(pixel_pin, num_pixels,
 
 
 steps = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+steps = [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1]
 
 
 def pulse():
@@ -21,6 +22,7 @@ def pulse():
     for step in steps:
         pixels.brightness = step
         pixels.show()
+        time.sleep(0.2)
 
 
 pulse()
