@@ -98,6 +98,7 @@ def start_outro_feedback():
 
 # Background music
 play_background_music_thread = threading.Thread(target=audio.play_background_music)
+print("starting background music")
 play_background_music_thread.start()
 
 time.sleep(5)
@@ -105,6 +106,7 @@ time.sleep(5)
 # Discrete sections
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SECTION 1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 1: play the audio and have the feedbacker do real subtle pulsing
+print("starting section 1")
 play_audio_1_thread = threading.Thread(target=audio.play_audio_1)
 play_audio_1_thread.start()
 
