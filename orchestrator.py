@@ -24,11 +24,10 @@ stop_step_4 = False
 
 
 # STEP 1
-def start_intro_feedback():
+def start_feedback():
     while True:
-        print("pulse")
-        time.sleep(1)
-        if stop_step_1:
+        f.animations.animate()
+        if stop_step_4:
             break
 
 # STEP 2
@@ -40,6 +39,7 @@ def start_radio_reader():
 
 
 def start_realtime_feedbacker():
+    f.animations.next()
     while True:
         item = q.get()
         print("sending a new realtime value to the feedbacker")
@@ -74,6 +74,7 @@ def get_greenbank_data():
 
 
 def start_greenbank_feedbacker():
+    f.animations.next()
     greenbank_data = get_greenbank_data()
     for sample in greenbank_data:
         for individual_reading in sample:
@@ -89,15 +90,12 @@ def start_greenbank_feedbacker():
 
 
 def start_outro_feedback():
-    while True:
-        print("pulse")
-        time.sleep(1)
-        if stop_step_4:
-            break
+    f.animations.next()
 
 
 # Background music
-play_background_music_thread = threading.Thread(target=audio.play_background_music)
+play_background_music_thread = threading.Thread(
+    target=audio.play_background_music)
 print("starting background music")
 play_background_music_thread.start()
 
