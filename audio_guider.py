@@ -22,3 +22,6 @@ class AudioGuider:
     def play_audio_4(self):
         audio_4 = AudioSegment.from_wav("./audio/4-outro.wav")
         play(audio_4 + 15)
+
+# https://github.com/jiaaro/pydub
+# background audio: https://creators.aiva.ai/

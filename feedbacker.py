@@ -24,6 +24,7 @@ class Feedbacker:
         print("rgb: ", rgb_tuple)
         print("inverse rgb: ", inverse_rgb_tuple)
 
+        # https://www.techiedelight.com/loop-through-list-with-index-python/
         for index, value in enumerate(self.pixels):
             if index % 2 != 0:
                 self.pixels[index] = rgb_tuple
@@ -38,6 +39,7 @@ def get_signal_power(raw_data):
     return real_squared + imag_squared
 
 
+# https://www.30secondsofcode.org/python/s/num-to-range/
 def map_num_to_range(num, inMin, inMax, outMin, outMax):
     return outMin + (float(num - inMin) / float(inMax - inMin) * (outMax - outMin))
 
@@ -51,6 +53,7 @@ def map_power_value_to_hex(power_value):
     return hex(rounded_mapped_number).split('x')[-1]
 
 
+#https://www.educative.io/answers/how-to-convert-hex-to-rgb-and-rgb-to-hex-in-python
 def hex_to_rgb(hex):
     rgb = []
     for i in (0, 2, 4):
@@ -68,3 +71,7 @@ def get_inverse_color(rgb_value):
     new_g = (original_g * -1) + 255
     new_b = (original_b * -1) + 255
     return (new_r, new_g, new_b)
+
+
+# neopixel library: https://docs.circuitpython.org/projects/neopixel/en/latest/api.html
+# https://learn.adafruit.com/adafruit-neopixel-uberguide/python-circuitpython
