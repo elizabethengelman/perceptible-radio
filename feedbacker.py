@@ -14,7 +14,7 @@ class Feedbacker:
         self.power_readings = []
         self.intro = Pulse(self.pixels, speed=0.5, color=(0, 102, 255))
         self.realtime = Chase(self.pixels, speed=0.1, color=(0, 255, 0), size=3, spacing=6)
-        self.greenbank = Chase(self.pixels, speed=0.3, color=(255, 0, 0), size=3, spacing=6)
+        self.greenbank = Pulse(self.pixels, speed=0.5, color=(255, 0, 0))
         self.outro = Pulse(self.pixels, speed=0.5, color=(0, 102, 255))
         self.animations = AnimationSequence(self.intro, self.realtime, self.greenbank, self.outro)
 
