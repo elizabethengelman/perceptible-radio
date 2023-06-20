@@ -39,6 +39,7 @@ def start_radio_reader():
 
 
 def start_realtime_feedbacker():
+    time.sleep(5)
     f.animations.next()
     while True:
         item = q.get()
@@ -74,6 +75,7 @@ def get_greenbank_data():
 
 
 def start_greenbank_feedbacker():
+    time.sleep(7)
     f.animations.next()
     greenbank_data = get_greenbank_data()
     for sample in greenbank_data:
@@ -90,6 +92,7 @@ def start_greenbank_feedbacker():
 
 
 def start_outro_feedback():
+    time.sleep(5)
     f.animations.next()
 
 
