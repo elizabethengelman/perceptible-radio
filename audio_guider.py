@@ -12,11 +12,11 @@ class AudioGuider:
         play(audio_1 + 15)
 
     def play_audio_2(self):
-        audio_2 = AudioSegment.from_wav("./audio/2-real-time-data.wav")
+        audio_2 = AudioSegment.from_wav("./audio/2-real-time.wav")
         play(audio_2 + 15)
 
     def play_audio_3(self):
-        audio_3 = AudioSegment.from_wav("./audio/3-greenbank-data.wav")
+        audio_3 = AudioSegment.from_wav("./audio/3-greenbank.wav")
         play(audio_3 + 15)
 
     def play_audio_4(self):
