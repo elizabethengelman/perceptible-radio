@@ -108,7 +108,7 @@ print("starting section 1")
 play_audio_1_thread = threading.Thread(target=audio.play_audio_1)
 play_audio_1_thread.start()
 
-intro_feedback = threading.Thread(target=start_intro_feedback)
+intro_feedback = threading.Thread(target=start_feedback)
 intro_feedback.start()
 
 play_audio_1_thread.join()
