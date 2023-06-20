@@ -4,7 +4,7 @@ from pydub.playback import play
 
 class AudioGuider:
     def play_background_music(self):
-        background = AudioSegment.from_mp3("./audio/background.mp3")
+        background = AudioSegment.from_mp3("./audio/background.wav")
         play(background - 15)
 
     def play_audio_1(self):
