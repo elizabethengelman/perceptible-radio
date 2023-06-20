@@ -31,13 +31,7 @@ class Feedbacker:
         inverse_rgb_tuple = get_inverse_color(rgb_tuple)
         print("rgb: ", rgb_tuple)
         print("inverse rgb: ", inverse_rgb_tuple)
-
-        # https://www.techiedelight.com/loop-through-list-with-index-python/
-        for index, value in enumerate(self.pixels):
-            if index % 2 != 0:
-                self.pixels[index] = rgb_tuple
-            else:
-                self.pixels[index] = inverse_rgb_tuple
+        self.animations.color = rgb_tuple
 
 
 # TODO: move this into radio_reader?
