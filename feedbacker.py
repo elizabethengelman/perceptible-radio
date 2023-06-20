@@ -12,10 +12,10 @@ class Feedbacker:
     def __init__(self):
         self.pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS, auto_write=False, brightness=0.1)
         self.power_readings = []
-        self.intro = Pulse(self.pixels, speed=0.3, color=(0, 0, 255))
+        self.intro = Pulse(self.pixels, speed=0.5, color=(0, 102, 255))
         self.realtime = Chase(self.pixels, speed=0.1, color=(0, 255, 0), size=3, spacing=6)
         self.greenbank = Chase(self.pixels, speed=0.3, color=(255, 0, 0), size=3, spacing=6)
-        self.outro = Pulse(self.pixels, speed=0.3, color=(0, 0, 255))
+        self.outro = Pulse(self.pixels, speed=0.5, color=(0, 102, 255))
         self.animations = AnimationSequence(self.intro, self.realtime, self.greenbank, self.outro)
 
     def change(self, raw_data):
