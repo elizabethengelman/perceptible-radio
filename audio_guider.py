@@ -8,7 +8,7 @@ class AudioGuider:
         play(background - 5)
 
     def play_audio_1(self):
-        audio_1 = AudioSegment.from_wav("./audio/1-intro.wav")
+        audio_1 = AudioSegment.from_wav("./audio/1-intro-short.wav")
         play(audio_1 + 5)
 
     def play_audio_2(self):
