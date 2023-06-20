@@ -10,7 +10,7 @@ NUM_PIXELS = 60
 
 class Feedbacker:
     def __init__(self):
-        self.pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS, auto_write=False)
+        self.pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS, auto_write=False, brightness=0.1)
         self.power_readings = []
         self.intro = Pulse(self.pixels, speed=0.3, color=(0, 0, 255))
         self.realtime = Chase(self.pixels, speed=0.1, color=(0, 255, 0), size=3, spacing=6)
